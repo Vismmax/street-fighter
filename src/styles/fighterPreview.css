@@ -12,7 +12,9 @@
   align-items: flex-start;
 }
 
-.fighter-preview___img {}
+.fighter-preview___right .fighter-preview___img {
+  transform: scaleX(-1);
+}
 
 .fighter-preview___info {
   width: 100%;
