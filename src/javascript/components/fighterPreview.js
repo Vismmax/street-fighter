@@ -44,9 +44,9 @@ export function createFighterInfo(fighter) {
     className: 'fighter-preview___info-name'
   });
   name.innerText = fighter.name;
-  const health = createFighterInfoElement('Health', fighter.health);
-  const attack = createFighterInfoElement('Attack', fighter.attack);
-  const defense = createFighterInfoElement('Defense', fighter.defense);
+  const health = createFighterInfoElement('❤️ Health', fighter.health);
+  const attack = createFighterInfoElement('⚔️ Attack', fighter.attack);
+  const defense = createFighterInfoElement('🛡️ Defense', fighter.defense);
   info.append(name, health,attack,defense);
   return info;
 }
