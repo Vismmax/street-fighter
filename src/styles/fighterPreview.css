@@ -12,6 +12,10 @@
   align-items: flex-start;
 }
 
+.fighter-preview___img {
+  height: 244px;
+}
+
 .fighter-preview___right .fighter-preview___img {
   transform: scaleX(-1);
 }
