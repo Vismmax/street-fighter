@@ -11,12 +11,9 @@ export function createFighterPreview(fighter, position) {
     const image = createFighterImage(fighter);
     const name = createElement({tagName:'h2'});
     name.innerText = fighter.name;
-    const health = createElement({tagName:'div'});
-    health.innerText = `Health: ${fighter.health}`;
-    const attack = createElement({tagName:'div'});
-    attack.innerText = `Attack: ${fighter.attack}`;
-    const defense = createElement({tagName:'div'});
-    defense.innerText = `Defense: ${fighter.defense}`;
+    const health = createFighterInfo('Health', fighter.health);
+    const attack = createFighterInfo('Attack', fighter.attack);
+    const defense = createFighterInfo('Defense', fighter.defense);
     fighterElement.append(image, name, health, attack, defense);
   } else if (fighter === false) {
     fighterElement.innerText = 'Failed to load fighter';
@@ -39,4 +36,10 @@ export function createFighterImage(fighter) {
   });
 
   return imgElement;
+}
+
+export function createFighterInfo(name, value) {
+  const element = createElement({tagName:'div'});
+  element.innerText = `${name}: ${value}`;
+  return element;
 }
