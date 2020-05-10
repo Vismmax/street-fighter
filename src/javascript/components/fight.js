@@ -7,13 +7,26 @@ export async function fight(firstFighter, secondFighter) {
 }
 
 export function getDamage(attacker, defender) {
-  // return damage
+  const hitPower = getHitPower(attacker);
+  const blockPower = getBlockPower(defender);
+  let damage = hitPower - blockPower;
+  damage = damage > 0 ? damage : 0;
+  return damage;
+}
+
+export function getCriticalDamage(attacker) {
+  const damage = attacker.attack * 2;
+  return damage;
 }
 
 export function getHitPower(fighter) {
-  // return hit power
+  const criticalHitChance = Math.random() + 1;
+  const power = fighter.attack * criticalHitChance;
+  return power;
 }
 
 export function getBlockPower(fighter) {
-  // return block power
+  const dodgeChance = Math.random() + 1;
+  const power = fighter.defense * dodgeChance;
+  return power;
 }
