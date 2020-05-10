@@ -7,7 +7,17 @@ export function createFighterPreview(fighter, position) {
     className: `fighter-preview___root ${positionClassName}`,
   });
 
-  // todo: show fighter info (image, name, health, etc.)
+  if (fighter) {
+    const image = createFighterImage(fighter);
+    const name = createElement({tagName:'h2'});
+    name.innerText = fighter.name;
+    const health = createFighterInfo('Health', fighter.health);
+    const attack = createFighterInfo('Attack', fighter.attack);
+    const defense = createFighterInfo('Defense', fighter.defense);
+    fighterElement.append(image, name, health, attack, defense);
+  } else if (fighter === false) {
+    fighterElement.innerText = 'Failed to load fighter';
+  }
 
   return fighterElement;
 }
@@ -26,4 +36,10 @@ export function createFighterImage(fighter) {
   });
 
   return imgElement;
+}
+
+export function createFighterInfo(name, value) {
+  const element = createElement({tagName:'div'});
+  element.innerText = `${name}: ${value}`;
+  return element;
 }
