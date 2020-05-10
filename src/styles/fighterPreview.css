@@ -21,7 +21,7 @@
 }
 
 .fighter-preview___info {
-  width: 100%;
+  width: 80%;
   padding: 10px;
   border-radius: 5px;
   background: saddlebrown;
@@ -38,5 +38,5 @@
 .fighter-preview___info-row {
   display: flex;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 15px;
 }
