@@ -53,7 +53,7 @@ export function createFighterInfo(fighter) {
 
 function createFighterInfoElement(name, value) {
   const element = createElement({
-    tagName:'div',
+    tagName: 'div',
     className: 'fighter-preview___info-row'
   });
   const nameElement = createElement({tagName: 'span'});
@@ -61,5 +61,14 @@ function createFighterInfoElement(name, value) {
   const valueElement = createElement({tagName: 'span'})
   valueElement.innerText = value;
   element.append(nameElement, valueElement);
+  return element;
+}
+
+function createLoadErrorElement(textError) {
+  const element = createElement({
+    tagName: 'div',
+    className: 'fighter-preview___info fighter-preview___load-error'
+  });
+  element.innerText = textError;
   return element;
 }
