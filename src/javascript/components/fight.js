@@ -8,17 +8,18 @@ export async function fight(firstFighter, secondFighter) {
       health: firstFighter.health,
       blockCriticalHit: false,
       indicator: document.getElementById('left-fighter-indicator')
-    }
+    };
     let fighterTwo = {
       fighter: secondFighter,
       health: secondFighter.health,
       blockCriticalHit: false,
       indicator: document.getElementById('right-fighter-indicator')
-    }
+    };
     let pressedKeys = new Set();
 
     document.addEventListener('keydown', (event) => {
       pressedKeys.add(event.code);
+
       switch (event.code) {
         case controls.PlayerOneAttack:
           if (!pressedKeys.has(controls.PlayerOneBlock) && !pressedKeys.has(controls.PlayerTwoBlock)) {
@@ -31,6 +32,7 @@ export async function fight(firstFighter, secondFighter) {
           }
           break;
       }
+
       if (!fighterOne.blockCriticalHit &&
           controls.PlayerOneCriticalHitCombination.includes(event.code) &&
           checkKeysCriticalHit(controls.PlayerOneCriticalHitCombination, pressedKeys)) {
@@ -39,21 +41,22 @@ export async function fight(firstFighter, secondFighter) {
       if (!fighterTwo.blockCriticalHit &&
           controls.PlayerTwoCriticalHitCombination.includes(event.code) &&
           checkKeysCriticalHit(controls.PlayerTwoCriticalHitCombination, pressedKeys)) {
-        strike(fighterTwo, fighterOne, true)
+        strike(fighterTwo, fighterOne, true);
       }
-
     });
 
     document.addEventListener('keyup', (event) => {
       pressedKeys.delete(event.code);
     });
 
-    function strike(attacker, defender, isCritical=false) {
+    function strike(attacker, defender, isCritical = false) {
       let damage;
       if (isCritical) {
         damage = getCriticalDamage(attacker.fighter);
         attacker.blockCriticalHit = true;
-        setTimeout(() => { attacker.blockCriticalHit = false }, 10000);
+        setTimeout(() => {
+          attacker.blockCriticalHit = false;
+        }, 10000);
       } else {
         damage = getDamage(attacker.fighter, defender.fighter);
       }
