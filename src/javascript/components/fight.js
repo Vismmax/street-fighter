@@ -1,8 +1,8 @@
 import { controls } from '../../constants/controls';
+import { setFighterHealthBar, playSound, showIconHit } from './fightEffects';
 
 export async function fight(firstFighter, secondFighter) {
   return new Promise((resolve) => {
-    // resolve the promise with the winner when fight is over
     let fighterOne = {
       fighter: firstFighter,
       health: firstFighter.health,
@@ -25,10 +25,18 @@ export async function fight(firstFighter, secondFighter) {
           if (!pressedKeys.has(controls.PlayerOneBlock) && !pressedKeys.has(controls.PlayerTwoBlock)) {
             strike(fighterOne, fighterTwo);
           }
+          if (pressedKeys.has(controls.PlayerTwoBlock)) {
+            playSound('block');
+            showIconHit(fighterTwo, 'block');
+          }
           break;
         case controls.PlayerTwoAttack:
           if (!pressedKeys.has(controls.PlayerTwoBlock) && !pressedKeys.has(controls.PlayerOneBlock)) {
             strike(fighterTwo, fighterOne);
+          }
+          if (pressedKeys.has(controls.PlayerOneBlock)) {
+            playSound('block');
+            showIconHit(fighterOne, 'block');
           }
           break;
       }
@@ -52,12 +60,16 @@ export async function fight(firstFighter, secondFighter) {
     function strike(attacker, defender, isCritical = false) {
       let damage;
       if (isCritical) {
+        playSound('crit');
+        showIconHit(defender, 'crit');
         damage = getCriticalDamage(attacker.fighter);
         attacker.blockCriticalHit = true;
         setTimeout(() => {
           attacker.blockCriticalHit = false;
         }, 10000);
       } else {
+        playSound('hit');
+        showIconHit(defender, 'hit');
         damage = getDamage(attacker.fighter, defender.fighter);
       }
       defender.health -= damage;
@@ -99,10 +111,4 @@ function checkKeysCriticalHit(keys, pressed) {
     }
   }
   return true;
-}
-
-function setFighterHealthBar(player) {
-  let percent = player.health * 100 / player.fighter.health;
-  if (percent < 0) percent = 0;
-  player.indicator.style.width = `${percent}%`;
 }
