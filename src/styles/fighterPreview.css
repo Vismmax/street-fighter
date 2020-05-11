@@ -40,3 +40,7 @@
   justify-content: space-between;
   padding: 0 15px;
 }
+
+.fighter-preview___load-error {
+  text-align: center;
+}
