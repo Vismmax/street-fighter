@@ -12,7 +12,8 @@ export function createFighterPreview(fighter, position) {
     const info = createFighterInfo(fighter);
     fighterElement.append(image, info);
   } else if (fighter === false) {
-    fighterElement.innerText = 'Failed to load fighter';
+    const error = createLoadErrorElement('Failed to load fighter 😪');
+    fighterElement.append(error);
   }
 
   return fighterElement;
