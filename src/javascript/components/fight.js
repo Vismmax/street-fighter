@@ -119,3 +119,11 @@ function playSound(type = 'hit') {
   audio.src = src;
   audio.autoplay = true;
 }
+
+function showIconHit(fighter, type = 'hit') {
+  let cls = 'arena___health-hit';
+  if (type === 'crit') cls = 'arena___health-crit';
+  if (type === 'block') cls = 'arena___health-block';
+  fighter.indicator.classList.add(cls);
+  setTimeout(() => {fighter.indicator.classList.remove(cls)}, 300);
+}
