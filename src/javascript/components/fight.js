@@ -1,8 +1,8 @@
 import { controls } from '../../constants/controls';
+import { setFighterHealthBar, playSound, showIconHit } from './fightEffects';
 
 export async function fight(firstFighter, secondFighter) {
   return new Promise((resolve) => {
-    // resolve the promise with the winner when fight is over
     let fighterOne = {
       fighter: firstFighter,
       health: firstFighter.health,
@@ -111,27 +111,4 @@ function checkKeysCriticalHit(keys, pressed) {
     }
   }
   return true;
-}
-
-function setFighterHealthBar(player) {
-  let percent = player.health * 100 / player.fighter.health;
-  if (percent < 0) percent = 0;
-  player.indicator.style.width = `${percent}%`;
-}
-
-function playSound(type = 'hit') {
-  let src = './resources/hit.mp3';
-  if (type === 'crit') src = './resources/crit.mp3';
-  if (type === 'block') src = './resources/block.mp3';
-  const audio = new Audio();
-  audio.src = src;
-  audio.autoplay = true;
-}
-
-function showIconHit(fighter, type = 'hit') {
-  let cls = 'arena___health-hit';
-  if (type === 'crit') cls = 'arena___health-crit';
-  if (type === 'block') cls = 'arena___health-block';
-  fighter.indicator.classList.add(cls);
-  setTimeout(() => {fighter.indicator.classList.remove(cls)}, 200);
 }
