@@ -35,7 +35,7 @@ export function createFighterImage(fighter) {
   return imgElement;
 }
 
-export function createFighterInfo(fighter) {
+function createFighterInfo(fighter) {
   const info = createElement({
     tagName: 'div',
     className: 'fighter-preview___info'
