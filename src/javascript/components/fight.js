@@ -59,6 +59,7 @@ export async function fight(firstFighter, secondFighter) {
       }
       defender.health -= damage;
       console.log(defender.health);
+      setFighterHealthBar(defender);
       if (defender.health <= 0) resolve(attacker.fighter);
     }
   });
@@ -96,4 +97,10 @@ function checkKeysCriticalHit(keys, pressed) {
     }
   }
   return true;
+}
+
+function setFighterHealthBar(player) {
+  let percent = player.health * 100 / player.fighter.health;
+  if (percent < 0) percent = 0;
+  player.indicator.style.width = `${percent}%`;
 }
