@@ -17,7 +17,7 @@ function createFighter(fighter) {
   const imgElement = createFighterImage(fighter);
   const fighterElement = createElement({
     tagName: 'div',
-    className: 'arena___fighter',
+    className: 'arena___fighter'
   });
 
   fighterElement.append(imgElement);
