@@ -25,11 +25,13 @@ export async function fight(firstFighter, secondFighter) {
           if (!pressedKeys.has(controls.PlayerOneBlock) && !pressedKeys.has(controls.PlayerTwoBlock)) {
             strike(fighterOne, fighterTwo);
           }
+          if (pressedKeys.has(controls.PlayerTwoBlock)) playSound('block');
           break;
         case controls.PlayerTwoAttack:
           if (!pressedKeys.has(controls.PlayerTwoBlock) && !pressedKeys.has(controls.PlayerOneBlock)) {
             strike(fighterTwo, fighterOne);
           }
+          if (pressedKeys.has(controls.PlayerOneBlock)) playSound('block');
           break;
       }
 
@@ -52,12 +54,14 @@ export async function fight(firstFighter, secondFighter) {
     function strike(attacker, defender, isCritical = false) {
       let damage;
       if (isCritical) {
+        playSound('crit');
         damage = getCriticalDamage(attacker.fighter);
         attacker.blockCriticalHit = true;
         setTimeout(() => {
           attacker.blockCriticalHit = false;
         }, 10000);
       } else {
+        playSound('hit');
         damage = getDamage(attacker.fighter, defender.fighter);
       }
       defender.health -= damage;
@@ -105,4 +109,13 @@ function setFighterHealthBar(player) {
   let percent = player.health * 100 / player.fighter.health;
   if (percent < 0) percent = 0;
   player.indicator.style.width = `${percent}%`;
+}
+
+function playSound(type = 'hit') {
+  let src = './resources/hit.mp3';
+  if (type === 'crit') src = './resources/crit.mp3';
+  if (type === 'block') src = './resources/block.mp3';
+  const audio = new Audio();
+  audio.src = src;
+  audio.autoplay = true;
 }
