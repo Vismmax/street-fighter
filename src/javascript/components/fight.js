@@ -25,13 +25,19 @@ export async function fight(firstFighter, secondFighter) {
           if (!pressedKeys.has(controls.PlayerOneBlock) && !pressedKeys.has(controls.PlayerTwoBlock)) {
             strike(fighterOne, fighterTwo);
           }
-          if (pressedKeys.has(controls.PlayerTwoBlock)) playSound('block');
+          if (pressedKeys.has(controls.PlayerTwoBlock)) {
+            playSound('block');
+            showIconHit(fighterTwo, 'block');
+          }
           break;
         case controls.PlayerTwoAttack:
           if (!pressedKeys.has(controls.PlayerTwoBlock) && !pressedKeys.has(controls.PlayerOneBlock)) {
             strike(fighterTwo, fighterOne);
           }
-          if (pressedKeys.has(controls.PlayerOneBlock)) playSound('block');
+          if (pressedKeys.has(controls.PlayerOneBlock)) {
+            playSound('block');
+            showIconHit(fighterOne, 'block');
+          }
           break;
       }
 
@@ -55,6 +61,7 @@ export async function fight(firstFighter, secondFighter) {
       let damage;
       if (isCritical) {
         playSound('crit');
+        showIconHit(defender, 'crit');
         damage = getCriticalDamage(attacker.fighter);
         attacker.blockCriticalHit = true;
         setTimeout(() => {
@@ -62,6 +69,7 @@ export async function fight(firstFighter, secondFighter) {
         }, 10000);
       } else {
         playSound('hit');
+        showIconHit(defender, 'hit');
         damage = getDamage(attacker.fighter, defender.fighter);
       }
       defender.health -= damage;
