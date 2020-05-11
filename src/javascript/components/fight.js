@@ -58,7 +58,6 @@ export async function fight(firstFighter, secondFighter) {
         damage = getDamage(attacker.fighter, defender.fighter);
       }
       defender.health -= damage;
-      console.log(defender.health);
       setFighterHealthBar(defender);
       if (defender.health <= 0) resolve(attacker.fighter);
     }
