@@ -11,7 +11,7 @@ export async function fight(firstFighter, secondFighter) {
     }
     let fighterTwo = {
       fighter: secondFighter,
-      health: firstFighter.health,
+      health: secondFighter.health,
       blockCriticalHit: false,
       indicator: document.getElementById('right-fighter-indicator')
     }
