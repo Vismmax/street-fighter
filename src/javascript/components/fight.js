@@ -133,5 +133,5 @@ function showIconHit(fighter, type = 'hit') {
   if (type === 'crit') cls = 'arena___health-crit';
   if (type === 'block') cls = 'arena___health-block';
   fighter.indicator.classList.add(cls);
-  setTimeout(() => {fighter.indicator.classList.remove(cls)}, 300);
+  setTimeout(() => {fighter.indicator.classList.remove(cls)}, 200);
 }
